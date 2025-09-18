@@ -11,4 +11,5 @@ export const env = cleanEnv(process.env, {
     PORT: port({ default: 8080 }),
     CORS_ORIGIN: str({ default: "*" }),
     ENABLE_REQUEST_LOG: bool({ default: false }),
+    DATABASE_URL: str(),
 });
