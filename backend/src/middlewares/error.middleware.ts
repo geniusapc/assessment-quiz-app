@@ -1,16 +1,18 @@
+import { HttpStatus } from "@/utils/httpStatus";
 import { logger } from "@/utils/logger";
+import { ApiResponse } from "@/utils/response";
 import type { Request, Response, NextFunction } from "express";
 
 export const notFoundHandler = (_req: Request, res: Response) => {
-    res.status(404).json({ error: "Not Found" });
+    return ApiResponse.error(res, "Not Found", HttpStatus.NOT_FOUND);
 };
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunction) => {
     logger.error({ err }, "Unhandled error");
+    const status = err.status || HttpStatus.INTERNAL_SERVER_ERROR;
+    const message = err.message || "Internal server error";
 
-    res.status(err.status || 500).json({
-        error: err.message || "Internal Server Error",
-    });
+    return ApiResponse.error(res, message, status);
 };

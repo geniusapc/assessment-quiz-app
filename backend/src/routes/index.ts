@@ -1,6 +1,6 @@
 import { Router } from "express";
 import healthRoutes from "./health.routes";
-import apiV1Routes from "./api-v1.routes";
+import apiV1Routes from "./versions/api-v1.routes";
 
 const router = Router();
 

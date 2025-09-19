@@ -1,9 +1,7 @@
-import "reflect-metadata";
 import app from "./app";
 import { env } from "./config/env";
 import { logger } from "./utils/logger";
 import { dbConnect } from "./config/data-source";
-
 
 
 const main = async () => {

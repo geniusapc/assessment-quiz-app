@@ -1,8 +1,8 @@
 import express from "express";
 import compression from "compression";
-import { requestLogger } from "@/middleware/requestLogger";
-import { securityMiddleware } from "@/middleware/security";
-import { errorHandler, notFoundHandler } from "@/middleware/error";
+import { requestLogger } from "@/middlewares/request-logger.middleware";
+import { securityMiddleware } from "@/middlewares/security";
+import { errorHandler, notFoundHandler } from "@/middlewares/error.middleware";
 import routes from "@/routes/index";
 
 const app = express();

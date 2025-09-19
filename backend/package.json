@@ -6,31 +6,39 @@
   "scripts": {
     "build": "tsc && tsc-alias && node fix-imports.js",
     "start": "node dist/server.js",
-    "start:dev": "nodemon --watch src --ext ts --exec \"tsx -r tsconfig-paths/register src/server.ts\""
+    "start:dev": "nodemon --watch src --ext ts --exec \"tsx -r tsconfig-paths/register src/server.ts\"",
+    "migration:run": "npx typeorm-ts-node-esm migration:run -d ./src/config/data-source.ts",
+    "migration:revert": "npx typeorm-ts-node-commonjs -d ./src/config/data-source.ts migration:revert",
+    "script:dev": "tsx src/scripts/index.ts",
+    "script:run": "node dist/scripts/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "compression": "^1.8.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "envalid": "^8.1.0",
     "express": "^5.1.0",
+    "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.3",
     "pino": "^9.9.5",
     "pino-http": "^10.5.0",
     "pino-pretty": "^13.1.1",
     "reflect-metadata": "^0.2.2",
-    "tsc-alias": "^1.8.16",
-    "typeorm": "^0.3.26"
+    "tsc-alias": "^1.8.16"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/compression": "^1.8.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.5.1",
     "@types/pino": "^7.0.4",
     "@types/pino-http": "^5.8.4",
@@ -41,6 +49,8 @@
     "tsconfig-paths": "^4.2.0",
     "tsup": "^8.5.0",
     "tsx": "^4.20.5",
+    "typeorm": "^0.3.26",
+    "typeorm-ts-node-commonjs": "^0.3.20",
     "typescript": "^5.9.2"
   }
 }

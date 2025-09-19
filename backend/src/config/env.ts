@@ -12,4 +12,6 @@ export const env = cleanEnv(process.env, {
     CORS_ORIGIN: str({ default: "*" }),
     ENABLE_REQUEST_LOG: bool({ default: false }),
     DATABASE_URL: str(),
+    ACCESS_TOKEN_SECRET: str(),
+    ACCESS_EXPIRY: str({ default: '1d' }),
 });
