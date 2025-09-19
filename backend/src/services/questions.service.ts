@@ -50,3 +50,38 @@ export const getQuestionsByUser = async (userId: number) => {
     order: { createdAt: "DESC" }
   });
 };
+
+
+
+export const listQuestionsForQuiz = async () => {
+  const questions = await questionRepository.find();
+  return questions.map((q) => ({
+    id: q.id,
+    questionText: q.questionText,
+    options: q.options,
+  }));
+};
+
+export const submitAnswers = async (
+  answers: { questionId: number; answer: number }[]
+) => {
+  if (!Array.isArray(answers) || answers.length === 0) {
+    throw new Error("Answers must be a non-empty array");
+  }
+
+  const questions = await questionRepository.find();
+  const qById = new Map(questions.map((q) => [q.id, q]));
+
+  let correct = 0;
+  for (const a of answers) {
+    const q = qById.get(a.questionId);
+    if (!q) continue;
+    if (q.correctAnswer === a.answer) correct++;
+  }
+
+  return {
+    score: correct,
+    total: answers.length,
+    correct,
+  };
+};
