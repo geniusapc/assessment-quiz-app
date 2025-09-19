@@ -19,7 +19,7 @@ export function Button({
     onClick,
 }: ButtonProps) {
     const baseStyles =
-        "w-full flex justify-center py-3.5 px-4 rounded-xl shadow-sm text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed";
+        "w-full flex justify-center py-3.5 px-4 rounded-xl shadow-sm text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed";
 
     const variants: Record<typeof variant, string> = {
         primary:
@@ -35,7 +35,7 @@ export function Button({
             type={type}
             onClick={onClick}
             disabled={disabled || loading}
-            className={`${baseStyles} ${variants[variant]} `}
+            className={`${baseStyles} ${variants[variant]}`}
         >
             {loading ? (
                 <div className="flex items-center justify-center space-x-2">
