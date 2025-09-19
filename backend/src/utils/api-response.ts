@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { HttpStatus } from "./httpStatus";
+import { HttpStatus } from "./http-status";
 
 export class ApiResponse {
     static success(

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import * as authService from "@/services/auth.service";
-import { ApiResponse } from "@/utils/response";
-import { HttpStatus } from "@/utils/httpStatus";
-import { asyncHandler } from "@/utils/asyncHandler";
+import { ApiResponse } from "@/utils/api-response";
+import { HttpStatus } from "@/utils/http-status";
+import { asyncHandler } from "@/utils/async-handler";
 
 export const register = asyncHandler(async (req: Request, res: Response) => {
     const { email, password } = req.body;

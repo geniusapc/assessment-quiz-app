@@ -1,6 +1,6 @@
-import { HttpStatus } from "@/utils/httpStatus";
+import { HttpStatus } from "@/utils/http-status";
 import { logger } from "@/utils/logger";
-import { ApiResponse } from "@/utils/response";
+import { ApiResponse } from "@/utils/api-response";
 import type { Request, Response, NextFunction } from "express";
 
 export const notFoundHandler = (_req: Request, res: Response) => {
