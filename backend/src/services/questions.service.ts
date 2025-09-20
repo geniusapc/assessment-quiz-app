@@ -52,7 +52,9 @@ export const getQuestions = async () => {
 
 
 export const listQuestionsForQuiz = async () => {
-  const questions = await questionRepository.find();
+  const questions = await questionRepository.find({
+    take: 10
+  });
   return questions.map((q) => ({
     id: q.id,
     questionText: q.questionText,
