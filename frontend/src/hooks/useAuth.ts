@@ -58,7 +58,7 @@ export function useAuth() {
         authResponse = await authService.register(credentials)
       }
 
-      login(authResponse)
+      login(authResponse.data)
       navigate("/questions")
       return true
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
