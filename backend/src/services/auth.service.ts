@@ -25,7 +25,10 @@ export const register = async (email: string, password: string, name: string) =>
 
     const user = userRepo.create({ email, password: hash, role, name });
     await userRepo.save(user);
-    return getUserData(user);
+    const payload = { userId: user.id, email: user.email };
+    const accessToken = await signAccessToken(payload);
+
+    return { user: getUserData(user), accessToken };
 };
 
 export const login = async (email: string, password: string): Promise<{ user: Partial<User>, accessToken: string }> => {
@@ -39,6 +42,8 @@ export const login = async (email: string, password: string): Promise<{ user: Pa
 
     return { user: getUserData(user), accessToken };
 };
+
+
 
 
 // function to get consistent user data to avoid leaking sensitive information
