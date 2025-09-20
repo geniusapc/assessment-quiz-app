@@ -3,16 +3,16 @@ import { Plus } from "lucide-react"
 import { useAppStore } from "../stores/appStore"
 import { useQuestionOperations } from "../hooks/questions/useQuestionOperations"
 import { QuestionCard, QuestionFormModal } from "../components/questions"
-import { LoadingSpinner, ErrorMessage, EmptyState } from "../components/ui"
+import { ErrorMessage, EmptyState } from "../components/ui"
 import { useQuestionStore } from "../stores/questionStore"
 import { questionService } from "../utils/services/questionService"
 import { Button } from "../components/ui/Button"
+import LoadingState from "../components/ui/LoadingState"
 
 export default function QuestionsPage() {
   const { questions, loading, error, setQuestions, setLoading, setError } = useQuestionStore()
   const { addNotification } = useAppStore()
 
-  console.log({ questions })
 
   const {
     showForm,
@@ -54,16 +54,8 @@ export default function QuestionsPage() {
   }
 
   if (loading && questions.length === 0) {
-    return (
-      <div className="flex justify-center items-center py-16">
-        <div className="text-center">
-          <LoadingSpinner size="lg" />
-          <p className="mt-4 text-gray-600">Loading your questions...</p>
-        </div>
-      </div>
-    )
+    return <LoadingState message="Loading questions..." size="lg" />
   }
-
   return (
     <div className="space-y-8">
       {/* Header */}
