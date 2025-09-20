@@ -8,12 +8,14 @@ const usersData = [
     {
         email: "admin@quizapp.com",
         password: "admin123",
-        roleName: UserRole.ADMIN
+        roleName: UserRole.ADMIN,
+        name: "admin"
     },
     {
         email: "john.doe@example.com",
         password: "password123",
-        roleName: UserRole.USER
+        roleName: UserRole.USER,
+        name: "john"
     }
 ];
 
@@ -56,7 +58,8 @@ export const seedUsersSafe = async () => {
             const user = db.getRepository(User).create({
                 email: userData.email,
                 password: hashedPassword,
-                role: role
+                role: role,
+                name: userData.name
             });
 
             await db.getRepository(User).save(user);
