@@ -1,18 +1,14 @@
-import { useEffect } from "react"
 import { Plus } from "lucide-react"
-import { useAppStore } from "../stores/appStore"
 import { useQuestionOperations } from "../hooks/questions/useQuestionOperations"
 import { QuestionCard, QuestionFormModal } from "../components/questions"
 import { ErrorMessage, EmptyState } from "../components/ui"
-import { useQuestionStore } from "../stores/questionStore"
-import { questionService } from "../utils/services/questionService"
+
 import { Button } from "../components/ui/Button"
 import LoadingState from "../components/ui/LoadingState"
+import { useQuestions } from "../hooks/questions/useQuestions"
 
 export default function QuestionsPage() {
-  const { questions, loading, error, setQuestions, setLoading, setError } = useQuestionStore()
-  const { addNotification } = useAppStore()
-
+  const { questions, loading, error } = useQuestions()
 
   const {
     showForm,
@@ -27,31 +23,7 @@ export default function QuestionsPage() {
 
   } = useQuestionOperations()
 
-  useEffect(() => {
-    loadQuestions()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
-  const loadQuestions = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      const data = await questionService.getAllQuestions()
-      setQuestions(data.data)
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.message || "Failed to load questions"
-      setError(errorMessage)
-      addNotification({
-        type: "error",
-        title: "Error Loading Questions",
-        message: errorMessage,
-      })
-    } finally {
-      setLoading(false)
-    }
-  }
 
   if (loading && questions.length === 0) {
     return <LoadingState message="Loading questions..." size="lg" />
