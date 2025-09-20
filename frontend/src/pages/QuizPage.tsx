@@ -39,6 +39,7 @@ export default function QuizPage() {
     return () => {
       resetQuiz()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const loadQuiz = async () => {
@@ -96,7 +97,6 @@ export default function QuizPage() {
         timeTaken,
       })
 
-      console.log(result.data)
 
       navigate("/results", { state: { result: result.data } })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
