@@ -12,12 +12,12 @@ export default function LoadingState({
     fullScreen = false,
 }: LoadingStateProps) {
     const containerClass = fullScreen
-        ? "flex items-center justify-center min-h-screen"
-        : "flex items-center justify-center py-16"
+        ? " min-h-screen"
+        : ""
 
     return (
-        <div className={containerClass}>
-            <div className=" flex flex-col items-center text-center">
+        <div className={`flex items-center justify-center ${containerClass}`}>
+            <div className="flex flex-col items-center text-center">
                 <LoadingSpinner size={size} />
                 {message && <p className="mt-4 text-gray-600">{message}</p>}
             </div>
