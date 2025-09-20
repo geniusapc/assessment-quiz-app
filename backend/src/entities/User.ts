@@ -25,6 +25,9 @@ export class User {
     @Column("varchar", { name: "password" })
     password!: string;
 
+    @Column("varchar")
+    name!: string;
+
 
     @ManyToOne("Role", (role: any) => role.users, { eager: true })
     @JoinColumn({ name: "role_id" })

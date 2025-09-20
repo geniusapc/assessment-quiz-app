@@ -5,8 +5,8 @@ import { HttpStatus } from "@/utils/http-status";
 import { asyncHandler } from "@/utils/async-handler";
 
 export const register = asyncHandler(async (req: Request, res: Response) => {
-    const { email, password } = req.body;
-    const user = await authService.register(email, password);
+    const { email, password, name } = req.body;
+    const user = await authService.register(email, password, name);
 
     return ApiResponse.success(res, user, "User registered successfully", HttpStatus.CREATED);
 });

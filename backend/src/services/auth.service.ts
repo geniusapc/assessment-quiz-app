@@ -9,7 +9,7 @@ const SALT_ROUNDS = 10;
 const userRepo = db.getRepository(User);
 const roleRepository = db.getRepository(Role);
 
-export const register = async (email: string, password: string) => {
+export const register = async (email: string, password: string, name: string) => {
     const existing = await userRepo.findOneBy({ email });
     if (existing) throw { status: 400, message: 'Email already in use' };
     const hash = await bcrypt.hash(password, SALT_ROUNDS);
@@ -23,7 +23,7 @@ export const register = async (email: string, password: string) => {
         throw new Error("User role not found");
     }
 
-    const user = userRepo.create({ email, password: hash, role });
+    const user = userRepo.create({ email, password: hash, role, name });
     await userRepo.save(user);
     return getUserData(user);
 };
@@ -46,6 +46,7 @@ const getUserData = (user: User) => {
     return {
         id: user.id,
         email: user.email,
+        name: user.name
     };
 }
 

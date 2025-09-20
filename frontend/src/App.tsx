@@ -5,6 +5,8 @@ import { ProtectedRoute, RouteGuard } from "./components/routing"
 import { NotificationToast } from "./components/ui"
 import QuestionsPage from "./pages/QuestionsPage"
 import { Layout } from "./components/layout"
+import QuizPage from "./pages/QuizPage"
+import ResultsPage from "./pages/ResultsPage"
 
 function App() {
   const { isAuthenticated } = useAuthStore()
@@ -26,6 +28,9 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="quiz" element={<QuizPage />} />
+              <Route path="results" element={<ResultsPage />} />
+
             </Route>
             <Route path="*" element={<Navigate to="/questions" replace />} />
           </Routes>

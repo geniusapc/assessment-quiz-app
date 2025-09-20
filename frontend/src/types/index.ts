@@ -1,6 +1,7 @@
 
-export * from "./questions"
-export * from "./auth"
+export * from "./questions";
+export * from "./auth";
+export * from "./quiz";
 
 export interface ApiError {
     message: string

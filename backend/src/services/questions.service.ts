@@ -62,9 +62,13 @@ export const listQuestionsForQuiz = async () => {
   }));
 };
 
-export const submitAnswers = async (
+export const submitAnswers = async (payload: {
   answers: { questionId: number; answer: number }[]
+  timeTaken: number
+
+}
 ) => {
+  const { answers, timeTaken } = payload
   if (!Array.isArray(answers) || answers.length === 0) {
     throw new Error("Answers must be a non-empty array");
   }
@@ -83,5 +87,6 @@ export const submitAnswers = async (
     score: correct,
     total: answers.length,
     correct,
+    timeTaken
   };
 };

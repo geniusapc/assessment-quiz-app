@@ -9,6 +9,6 @@ export const listQuestions = asyncHandler(async (req: Request, res: Response) =>
 });
 
 export const submitAnswers = asyncHandler(async (req: Request, res: Response) => {
-    const result = await questionService.submitAnswers(req.body.answers);
+    const result = await questionService.submitAnswers(req.body);
     return ApiResponse.success(res, result, "Quiz submitted successfully");
 });

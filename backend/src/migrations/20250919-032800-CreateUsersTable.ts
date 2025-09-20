@@ -30,6 +30,7 @@ export class CreateUsersTable1698765432100 implements MigrationInterface {
                 "id" SERIAL PRIMARY KEY,
                 "email" VARCHAR UNIQUE NOT NULL,
                 "password" VARCHAR NOT NULL,
+                "name" VARCHAR NOT NULL,
                 "role_id" INTEGER NOT NULL,
                 "created_at" TIMESTAMP NOT NULL DEFAULT NOW(),
                 "updated_at" TIMESTAMP NOT NULL DEFAULT NOW(),

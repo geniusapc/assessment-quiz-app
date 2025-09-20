@@ -12,4 +12,8 @@ export const submitAnswersValidator = [
     body("answers.*.answer")
         .isInt({ min: 0 })
         .withMessage("Answer must be a valid option index (number >= 0)"),
+
+    body("timeTaken")
+        .isInt({ min: 0 })
+        .withMessage("Time taken must be a time in secs"),
 ];
