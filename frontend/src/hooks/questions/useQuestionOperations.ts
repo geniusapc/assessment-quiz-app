@@ -10,6 +10,7 @@ export function useQuestionOperations() {
   const { addNotification } = useAppStore()
   const [showForm, setShowForm] = useState(false)
   const [editingQuestion, setEditingQuestion] = useState<Question | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleCreateQuestion = async (questionData: {
     questionText: string
@@ -17,6 +18,7 @@ export function useQuestionOperations() {
     correctAnswer: number
   }) => {
     try {
+      setIsLoading(true)
       const newQuestion = await questionService.createQuestion(questionData)
       addQuestion(newQuestion.data)
       setShowForm(false)
@@ -25,8 +27,10 @@ export function useQuestionOperations() {
         title: "Question Created",
         message: "Your question has been successfully created.",
       })
+      setIsLoading(false)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
+      setIsLoading(false)
       const errorMessage = err.response?.data?.message || "Failed to create question"
       setError(errorMessage)
       addNotification({
@@ -107,6 +111,7 @@ export function useQuestionOperations() {
   }
 
   return {
+    isLoading,
     showForm,
     editingQuestion,
     setShowForm,

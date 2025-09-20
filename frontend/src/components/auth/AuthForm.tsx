@@ -113,7 +113,7 @@ export default function AuthForm({ isLogin, onSubmit, loading, error, onErrorCle
         </div>
       )}
 
-      <Button type="submit" loading={loading}>
+      <Button type="submit" loading={loading} className="w-full">
         {isLogin ? "Sign In" : "Create Account"}
       </Button>
     </form>

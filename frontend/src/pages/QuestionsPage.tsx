@@ -6,6 +6,7 @@ import { QuestionCard, QuestionFormModal } from "../components/questions"
 import { LoadingSpinner, ErrorMessage, EmptyState } from "../components/ui"
 import { useQuestionStore } from "../stores/questionStore"
 import { questionService } from "../utils/services/questionService"
+import { Button } from "../components/ui/Button"
 
 export default function QuestionsPage() {
   const { questions, loading, error, setQuestions, setLoading, setError } = useQuestionStore()
@@ -22,11 +23,13 @@ export default function QuestionsPage() {
     handleDeleteQuestion,
     handleEditQuestion,
     handleCancelForm,
+    isLoading
+
   } = useQuestionOperations()
 
   useEffect(() => {
     loadQuestions()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const loadQuestions = async () => {
@@ -69,13 +72,10 @@ export default function QuestionsPage() {
           <h1 className="text-3xl font-bold text-gray-800">Questions Management</h1>
           <p className="text-gray-600 mt-2">Create and manage quiz questions</p>
         </div>
-        <button
-          onClick={() => setShowForm(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 transition-all duration-200 shadow-md hover:shadow-lg"
-        >
+        <Button onClick={() => setShowForm(true)}>
           <Plus className="h-5 w-5" />
           <span>Add Question</span>
-        </button>
+        </Button>
       </div>
 
       {error && (
@@ -89,6 +89,7 @@ export default function QuestionsPage() {
         editingQuestion={editingQuestion}
         onSubmit={editingQuestion ? handleUpdateQuestion : handleCreateQuestion}
         onCancel={handleCancelForm}
+        isLoading={isLoading}
       />
 
       {/* Questions List */}
@@ -98,13 +99,11 @@ export default function QuestionsPage() {
             title="No questions yet"
             description="Start building your quiz by adding your first question."
             action={
-              <button
-                onClick={() => setShowForm(true)}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 transition-all duration-200 shadow-md hover:shadow-lg"
-              >
+              <Button onClick={() => setShowForm(true)}>
                 <Plus className="h-5 w-5" />
                 <span>Add Your First Question</span>
-              </button>
+              </Button>
+
             }
           />
         </div>

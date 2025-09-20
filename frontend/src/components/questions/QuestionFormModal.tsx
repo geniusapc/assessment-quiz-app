@@ -10,9 +10,10 @@ interface QuestionFormModalProps {
     correctAnswer: number
   }) => Promise<void>
   onCancel: () => void
+  isLoading: boolean
 }
 
-export default function QuestionFormModal({ isOpen, editingQuestion, onSubmit, onCancel }: QuestionFormModalProps) {
+export default function QuestionFormModal({ isOpen, editingQuestion, onSubmit, onCancel, isLoading }: QuestionFormModalProps) {
   if (!isOpen) return null
 
   return (
@@ -22,7 +23,7 @@ export default function QuestionFormModal({ isOpen, editingQuestion, onSubmit, o
           <h2 className="text-2xl font-bold text-gray-800 mb-6">
             {editingQuestion ? "Edit Question" : "Add New Question"}
           </h2>
-          <QuestionForm initialData={editingQuestion} onSubmit={onSubmit} onCancel={onCancel} />
+          <QuestionForm initialData={editingQuestion} onSubmit={onSubmit} onCancel={onCancel} isLoading={isLoading} />
         </div>
       </div>
     </div>

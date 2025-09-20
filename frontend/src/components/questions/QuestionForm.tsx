@@ -5,6 +5,7 @@ import type { Question } from "../../types"
 import ErrorMessage from "../ui/ErrorMessage"
 import { questionSchema } from "../../schemas"
 import { validateWithSchema, getFirstError } from "../../utils/validation"
+import { Button } from "../ui/Button"
 
 interface QuestionFormProps {
   initialData?: Question | null
@@ -14,9 +15,10 @@ interface QuestionFormProps {
     correctAnswer: number
   }) => void
   onCancel: () => void
+  isLoading: boolean
 }
 
-export default function QuestionForm({ initialData, onSubmit, onCancel }: QuestionFormProps) {
+export default function QuestionForm({ initialData, onSubmit, onCancel, isLoading }: QuestionFormProps) {
   const [formData, setFormData] = useState({
     questionText: "",
     options: ["", "", "", ""],
@@ -195,20 +197,13 @@ export default function QuestionForm({ initialData, onSubmit, onCancel }: Questi
 
       {/* Form Actions */}
       <div className="flex items-center justify-end space-x-3 pt-6 border-t border-gray-200">
-        <button
-          type="button"
-          onClick={onCancel}
-          className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2.5 px-4 rounded-xl flex items-center space-x-2 transition-all duration-200"
-        >
+        <Button onClick={onCancel} variant="secondary" disabled={isLoading}>
           <X className="h-4 w-4" />
           <span>Cancel</span>
-        </button>
-        <button
-          type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-6 rounded-xl transition-all duration-200"
-        >
+        </Button>
+        <Button type="submit" loading={isLoading}>
           {initialData ? "Update Question" : "Create Question"}
-        </button>
+        </Button>
       </div>
     </form>
   )

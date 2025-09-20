@@ -8,6 +8,8 @@ type ButtonProps = {
     variant?: "primary" | "secondary" | "destructive";
     children: ReactNode;
     onClick?: () => void;
+    className?: string
+    
 };
 
 export function Button({
@@ -17,9 +19,10 @@ export function Button({
     variant = "primary",
     children,
     onClick,
+    className
 }: ButtonProps) {
     const baseStyles =
-        "w-full flex justify-center py-3.5 px-4 rounded-xl shadow-sm text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed";
+        " flex justify-center items-center space-x-2 py-2.5 px-4 rounded-xl shadow-sm text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed";
 
     const variants: Record<typeof variant, string> = {
         primary:
@@ -35,7 +38,7 @@ export function Button({
             type={type}
             onClick={onClick}
             disabled={disabled || loading}
-            className={`${baseStyles} ${variants[variant]}`}
+            className={`${baseStyles} ${variants[variant]} ${className}`}
         >
             {loading ? (
                 <div className="flex items-center justify-center space-x-2">
