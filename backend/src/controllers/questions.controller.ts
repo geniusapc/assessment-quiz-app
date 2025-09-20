@@ -55,8 +55,7 @@ export const deleteQuestion = asyncHandler(async (req: Request, res: Response) =
 });
 
 export const getUserQuestions = asyncHandler(async (req: Request, res: Response) => {
-  const userId = (req as any).user.userId as number;
-  const questions = await questionService.getQuestionsByUser(userId);
+  const questions = await questionService.getQuestions();
 
-  return ApiResponse.success(res, questions, 'User questions retrieved successfully');
+  return ApiResponse.success(res, questions, 'Questions retrieved successfully');
 });

@@ -43,10 +43,8 @@ export const deleteQuestion = async (id: number) => {
   return result.affected! > 0;
 };
 
-export const getQuestionsByUser = async (userId: number) => {
-
+export const getQuestions = async () => {
   return questionRepository.find({
-    where: { createdBy: userId },
     order: { createdAt: "DESC" }
   });
 };
