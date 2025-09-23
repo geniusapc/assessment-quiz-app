@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: production
+    container_name: quiz_backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8080:8080"
+    networks:
+      - app_net
+
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    container_name: quiz_frontend
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "5173:80"
+    networks:
+      - app_net
+
+networks:
+  app_net:
